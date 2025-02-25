@@ -14,13 +14,13 @@ export default function Countdown({ specialDate }: { specialDate: Date }) {
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date()
-      const difference = specialDate.getTime() - now.getTime()
+      const difference = Math.abs(specialDate.getTime() - now.getTime())
 
       setTimeLeft({
-        days : Math.max(Math.floor(difference / (1000 * 60 * 60 * 24)), 0),
-        hours: Math.max(Math.floor((difference / (1000 * 60 * 60)) % 24),0),
-        minutes: Math.max(Math.floor((difference / 1000 / 60) % 60),0),
-        seconds: Math.max(Math.floor((difference / 1000) % 60),0),
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
       })
     }, 1000)
 
