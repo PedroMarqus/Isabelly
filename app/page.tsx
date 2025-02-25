@@ -1,101 +1,143 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { motion } from "framer-motion"
+import { Heart } from "lucide-react"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+
+export default function Page() {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  })
+
+  // Set your special date here
+  const specialDate = new Date("2024-12-31")
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date()
+      const difference = specialDate.getTime() - now.getTime()
+
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [specialDate])
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-b from-pink-100 to-pink-200">
+      {/* Floating Hearts */}
+      <div className="fixed inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-pink-500"
+            initial={{
+              x: Math.random() * window.innerWidth,
+              y: window.innerHeight,
+            }}
+            animate={{
+              y: -100,
+              x: Math.random() * window.innerWidth,
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          >
+            <Heart size={Math.random() * 20 + 10} />
+          </motion.div>
+        ))}
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-20">
+        {/* Hero Section */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-20">
+          <h1 className="text-4xl md:text-6xl font-bold text-pink-600 mb-4">Para Meu Amor ❤️</h1>
+          <p className="text-xl text-pink-700">Cada dia ao seu lado é uma nova aventura de amor</p>
+        </motion.div>
+
+        {/* Countdown */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-white/80 rounded-xl p-8 backdrop-blur-sm mb-20"
+        >
+          <h2 className="text-2xl text-pink-600 text-center mb-6">Tempo até nosso momento especial</h2>
+          <div className="grid grid-cols-4 gap-4 text-center">
+            <div className="bg-pink-100 rounded-lg p-4">
+              <div className="text-3xl font-bold text-pink-600">{timeLeft.days}</div>
+              <div className="text-pink-500">Dias</div>
+            </div>
+            <div className="bg-pink-100 rounded-lg p-4">
+              <div className="text-3xl font-bold text-pink-600">{timeLeft.hours}</div>
+              <div className="text-pink-500">Horas</div>
+            </div>
+            <div className="bg-pink-100 rounded-lg p-4">
+              <div className="text-3xl font-bold text-pink-600">{timeLeft.minutes}</div>
+              <div className="text-pink-500">Minutos</div>
+            </div>
+            <div className="bg-pink-100 rounded-lg p-4">
+              <div className="text-3xl font-bold text-pink-600">{timeLeft.seconds}</div>
+              <div className="text-pink-500">Segundos</div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Love Letter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white/80 rounded-xl p-8 backdrop-blur-sm mb-20"
+        >
+          <h2 className="text-2xl text-pink-600 text-center mb-6">Carta de Amor</h2>
+          <p className="text-pink-700 leading-relaxed">
+            Meu amor,
+            <br />
+            <br />
+            Cada momento ao seu lado é como um sonho que se torna realidade. Seu sorriso ilumina meus dias, e seu amor
+            faz meu coração transbordar de felicidade. Você é a pessoa mais especial que já conheci, e sou grato(a) por
+            ter você em minha vida.
+            <br />
+            <br />
+            Com todo meu amor,
+            <br />
+            Seu amor
+          </p>
+        </motion.div>
+
+        {/* Photo Gallery */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="relative h-64 rounded-xl overflow-hidden hover:scale-105 transition-transform">
+              <Image
+                src={`/placeholder.svg?height=256&width=384`}
+                alt={`Momento especial ${i + 1}`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </motion.div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
+
