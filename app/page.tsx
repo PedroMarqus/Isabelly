@@ -1,8 +1,12 @@
+import dynamic from "next/dynamic"
 import Countdown from "../app/components/countdown"
-import FloatingHearts from "../app/components/floating-heart"
 import HeroSection from "../app/components/hero-section"
 import LoveLetter from "../app/components/love-letter"
 import PhotoGallery from "../app/components/photo-gallery"
+
+const FloatingHearts = dynamic(() => import("../app/components/floating-heart"), {
+  ssr: false,
+})
 
 export default function Page() {
   // Set your special date here
