@@ -6,9 +6,25 @@ import { useEffect, useState } from "react"
 
 export default function FloatingHearts() {
   const [mounted, setMounted] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 1000, height: 1000 })
 
   useEffect(() => {
+    setDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+
+    const handleResize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    window.addEventListener("resize", handleResize)
     setMounted(true)
+
+    return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   if (!mounted) return null
@@ -20,12 +36,12 @@ export default function FloatingHearts() {
           key={i}
           className="absolute text-pink-500"
           initial={{
-            x: Math.random() * (typeof window !== "undefined" ? window.innerWidth : 1000),
-            y: typeof window !== "undefined" ? window.innerHeight : 1000,
+            x: Math.random() * dimensions.width,
+            y: dimensions.height,
           }}
           animate={{
             y: -100,
-            x: Math.random() * (typeof window !== "undefined" ? window.innerWidth : 1000),
+            x: Math.random() * dimensions.width,
           }}
           transition={{
             duration: Math.random() * 10 + 10,

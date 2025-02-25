@@ -1,12 +1,8 @@
-import dynamic from "next/dynamic"
+import ClientWrapper from "../app/components/client-wrapper"
 import Countdown from "../app/components/countdown"
 import HeroSection from "../app/components/hero-section"
 import LoveLetter from "../app/components/love-letter"
 import PhotoGallery from "../app/components/photo-gallery"
-
-const FloatingHearts = dynamic(() => import("../app/components/floating-heart"), {
-  ssr: false,
-})
 
 export default function Page() {
   // Set your special date here
@@ -14,7 +10,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-pink-200">
-      <FloatingHearts />
+      <ClientWrapper />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-20">
