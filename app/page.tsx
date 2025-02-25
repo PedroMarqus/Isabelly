@@ -6,7 +6,7 @@ import PhotoGallery from "../app/components/photo-gallery"
 
 export default function Page() {
   // Set your special date here
-  const specialDate = new Date("2024-12-31")
+  const specialDate = new Date("2024-11-23")
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-pink-200">

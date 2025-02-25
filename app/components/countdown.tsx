@@ -17,10 +17,10 @@ export default function Countdown({ specialDate }: { specialDate: Date }) {
       const difference = specialDate.getTime() - now.getTime()
 
       setTimeLeft({
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
+        days : Math.max(Math.floor(difference / (1000 * 60 * 60 * 24)), 0),
+        hours: Math.max(Math.floor((difference / (1000 * 60 * 60)) % 24),0),
+        minutes: Math.max(Math.floor((difference / 1000 / 60) % 60),0),
+        seconds: Math.max(Math.floor((difference / 1000) % 60),0),
       })
     }, 1000)
 
@@ -34,7 +34,7 @@ export default function Countdown({ specialDate }: { specialDate: Date }) {
       transition={{ delay: 0.2 }}
       className="bg-white/80 rounded-xl p-8 backdrop-blur-sm mb-20"
     >
-      <h2 className="text-2xl text-pink-600 text-center mb-6">Tempo até nosso momento especial</h2>
+      <h2 className="text-2xl text-pink-600 text-center mb-6">A quanto tempo sou feliz</h2>
       <div className="grid grid-cols-4 gap-4 text-center">
         <div className="bg-pink-100 rounded-lg p-4">
           <div className="text-3xl font-bold text-pink-600">{timeLeft.days}</div>
