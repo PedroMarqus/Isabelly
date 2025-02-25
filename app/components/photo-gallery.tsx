@@ -6,7 +6,7 @@ import { useState } from "react"
 
 export default function PhotoGallery() {
   // Array com as extensões de arquivo suportadas
-  const extensions = ["jpg", "jpeg", "png", "webp"]
+  //const extensions = ["jpg", "jpeg", "png", "webp"]
   const totalPhotos = 6 // Número total de fotos que você tem
 
   // Estado para controlar quais imagens falharam ao carregar
