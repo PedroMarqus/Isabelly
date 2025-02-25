@@ -10,7 +10,7 @@ export default function LoveLetter() {
       transition={{ delay: 0.4 }}
       className="bg-white/80 rounded-xl p-8 backdrop-blur-sm mb-20"
     >
-      <h2 className="text-2xl text-pink-600 text-center mb-6">Carta de Amor</h2>
+      <h2 className="text-3xl text-pink-600 text-center mb-6">Carta de Amor</h2>
       <p className="text-pink-700 leading-relaxed">
         Meu amor,
         <br />
@@ -22,7 +22,7 @@ export default function LoveLetter() {
         <br />
         Com todo meu amor,
         <br />
-        Seu amor
+        Cowboy da Isa
       </p>
     </motion.div>
   )
