@@ -46,7 +46,7 @@ export default function PhotoGallery() {
         return (
           <div
             key={photoIndex}
-            className="relative h-64 rounded-xl overflow-hidden group hover:scale-105 transition-transform"
+            className="relative h-72 rounded-xl overflow-hidden group hover:scale-105 transition-transform"
           >
             {/* Tenta carregar a imagem com a primeira extensão */}
             <Image
@@ -59,7 +59,12 @@ export default function PhotoGallery() {
             />
             {/* Overlay com número da foto */}
             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <p className="text-white text-lg">Foto {photoIndex}</p>
+            {photoIndex === 1 && <p className="text-white text-lg">Sorriso que me encantou</p>}
+            {photoIndex === 2 && <p className="text-white text-lg">Olhar que me seduziu</p>}
+            {photoIndex === 3 && <p className="text-white text-lg">Tatto day</p>}
+            {photoIndex === 4 && <p className="text-white text-lg">Eu bobo perto de você</p>}
+            {photoIndex === 5 && <p className="text-white text-lg">Até no carnaval você me faz feliz</p>}
+            {photoIndex === 6 && <p className="text-white text-lg">Biquinho lindo</p>}
             </div>
           </div>
         )
